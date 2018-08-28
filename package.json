@@ -1,0 +1,35 @@
+{
+  "name": "blog-node",
+  "version": "1.0.0",
+  "description": "server based on nodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icedJuice/blog-node.git"
+  },
+  "keywords": [
+    "server",
+    "node",
+    "nodeJs",
+    "express"
+  ],
+  "author": "icedJuice (1210712996@qq.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icedJuice/blog-node/issues"
+  },
+  "homepage": "https://github.com/icedJuice/blog-node#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "mongodb": "^3.0.4",
+    "mongoose": "^5.0.10",
+    "nodemailer": "^4.6.3",
+    "underscore": "^1.9.0"
+  }
+}

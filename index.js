@@ -1,1 +1,5 @@
-const funcServer = require('./src/Server/func-server')
+const Server = require('./src/server/index.js')
+
+Server();
+
+console.info('successed run it with exit code ' + 200);

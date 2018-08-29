@@ -1,6 +1,6 @@
 const users = [
-    {nickname: '寒玉知', password: '123456'},
-    {nickname: '小路灯', password: '123456'},
+    {nickname: '寒玉知', password: 'e10adc3949ba59abbe56e057f20f883e'},
+    {nickname: '小路灯', password: 'e10adc3949ba59abbe56e057f20f883e'},
 ]
 
 const sign_in = function sing_in(data) {

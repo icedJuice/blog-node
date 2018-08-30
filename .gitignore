@@ -1,3 +1,7 @@
+# builder
+.idea
+.git
+
 # dependencies
 node_modules
 

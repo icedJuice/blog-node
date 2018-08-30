@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const sign = require('./login/index.js');
-const router = express.Router();
+const editor = require('./edit/edit.js');
 // express 获取post参数用
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,16 +23,26 @@ const Server = function () {
     app.post('/sign/sign_in', function (req, res) {
         res.send(sign.in(req.body))
     })
+
 // 注册
     app.post('/sign/sign_up', function (req, res) {
         res.send(sign.up(req.body))
     })
 
-
-//发文
+// 发文
     app.post('/article/edit', function (req, res) {
-        res.send(sign.up(req.body))
+        res.send(editor(req.body));
     })
+
+// 标签
+    app.get('/tags/list', function (req, res) {
+        res.send()
+    })
+    app.post('/article/edit', function (req, res) {
+        res.send(editor(req.body));
+    })
+
+
 
     app.listen(12300)
 }

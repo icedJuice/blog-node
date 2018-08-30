@@ -1,21 +1,14 @@
-const users = [
-    {nickname: '寒玉知', password: 'e10adc3949ba59abbe56e057f20f883e'},
-    {nickname: '小路灯', password: 'e10adc3949ba59abbe56e057f20f883e'},
-]
+const users = require('../../db/mook/userList.js');
+const checkToken = require('../func/checkToken.js');
+const weaveErrorMsg = require('../errorMark/index.js');
 
 const sign_in = function sing_in(data) {
-    if(!(data.nickname && data.password)) return {
-        status: {
-            code: '301',
-            message: '参数有误'
-        },
-        data: null
-    }
+    if(!(data.nickname && data.password)) return weaveErrorMsg(301);
+    // 用户名OK 标志位
     var un_ok = false;
+    // 密码OK 标志位
     var pw_ok = false;
     users.forEach(function (item, index) {
-        console.log(item, index)
-        console.log(data)
         if(item.nickname === data.nickname) {
             un_ok = true;
             if(item.password === data.password) {
@@ -25,42 +18,27 @@ const sign_in = function sing_in(data) {
     })
     if(un_ok && pw_ok) {
         return {
-            status: {
-                code: '200',
-                message: 'ok'
-            },
+            status: weaveErrorMsg(200),
             data: {
-                nickname: data.nickname
+                nickname: data.nickname,
+                token: 'token' // 可以直接登录
             }
         }
     } else if (!un_ok) {
         return {
-            status: {
-                code: '302',
-                message: '用户不存在'
-            },
+            status: weaveErrorMsg(302),
             data: null
         }
-    }
-    else {
+    } else {
         return {
-            status: {
-                code: '303',
-                message: '密码错误'
-            },
+            status: weaveErrorMsg(303),
             data: null
         }
     }
 }
 
 const sign_up = function (data) {
-    if(!(data.nickname && data.password)) return {
-        status: {
-            code: '301',
-            message: '参数有误'
-        },
-        data: null
-    }
+    if(!(data.nickname && data.password)) return weaveErrorMsg(301);
     var state = false;
     users.forEach(function (item, index) {
         if(item.nickname === data.nickname) {
@@ -68,23 +46,13 @@ const sign_up = function (data) {
         }
     })
     if(state) {
-        return {
-            status: {
-                code: '304',
-                message: '用户已存在'
-            },
-            data: {
-                nickname: data.nickname
-            }
-        }
+        return weaveErrorMsg(312)
     } else {
         return {
-            status: {
-                code: '200',
-                message: 'ok'
-            },
+            status: weaveErrorMsg(200),
             data: {
-                nickname: data.nickname
+                nickname: data.nickname,
+                token: 'token' // 直接登录
             }
         }
     }

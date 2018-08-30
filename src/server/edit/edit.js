@@ -17,63 +17,36 @@
 *
 */
 
-const errMsg = {
-    301: 'token error',
-    302: '缺少字段'
+const weaveErrorMsg = require('../errorMark/index.js');
+const checkToken = require('../func/checkToken.js');
+
+
+const newArti = function (data) {
+    // here needs build a new article
+
 }
 
-const weaveErrorMsg = function (errCode) {
-    if(errCode && errMsg[errCode]) {
-        return {
-            status: {
-                code: errCode,
-                message: errMsg[errCode]
-            },
-            data: null
-        }
-    } else {
-        return {
-            status: {
-                code: 500,
-                message: 'unkonwn error'
-            },
-            data: null
-        }
-    }
+const editArti = function (data) {
+    // here needs reedit old article
+
 }
 
-const checkToken = function (token) {
-    // search sql to verify token
-    // we will do some sql methods here
 
-    if (token) {
-        return true;
-    } else {
-        return false;
-    }
-}
-const format = function (token) {
-    if(checkToken(token)) {
-
-    }
-}
 const editor = function (data) {
     // need params
-
     if(!!data.token) {
         if(data.type) {
             if(checkToken(data.token)) {
                 if(data.type === 1) {
                     // new article
-
+                    newArti(data);
                 } else if(data.type === 2){
                     // rebuild
-
+                    editArti(data);
                 } else {
                     // do something
                 }
             } else {
-
             }
         } else {
             return weaveErrorMsg(302)
@@ -82,7 +55,5 @@ const editor = function (data) {
         return weaveErrorMsg(301)
     }
 }
-
-
 
 module.exports = editor;

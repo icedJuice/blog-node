@@ -6,4 +6,4 @@ const userSchema = {
     token: String
 }
 
-models.exports = userSchema;
+module.exports = userSchema;

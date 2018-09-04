@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 // 跨域服务
 const cors = require('cors');
 const app = express();
-const sign = require('./login/index.js');
+const sign = require('./sign/index.js');
 const editor = require('./edit/edit.js');
 // express 获取post参数用
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +21,10 @@ const Server = function () {
 
 // 登录
     app.post('/sign/sign_in', function (req, res) {
-        res.send(sign.in(req.body))
+        sign.in(req.body, function (data) {
+            res.send(data)
+        })
+
     })
 
 // 注册
@@ -41,7 +44,6 @@ const Server = function () {
     app.post('/article/edit', function (req, res) {
         res.send(editor(req.body));
     })
-
 
 
     app.listen(12300)

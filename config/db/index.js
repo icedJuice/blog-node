@@ -12,13 +12,13 @@
  */
 
 const dbconf = {
-    host: 'http://localhost:27017',
+    host: '127.0.0.1/blog',
     username: 'root',
     password: '123456',
     tables: {
         tag: 'tag',
         feed: 'feed',
-        user: 'user'
+        users: 'users'
     }
 }
 

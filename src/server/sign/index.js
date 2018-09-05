@@ -3,12 +3,18 @@ const weaveErrorMsg = require('../errorMark/index.js');
 const dbs = require('../../db/index.js');
 
 function _in(data, callback) {
-    if(!(data.nickname && data.password)) return callback(weaveErrorMsg(302));
+    if(!(data.nickname && data.password)) return {
+        status: callback(weaveErrorMsg(302)),
+        data: null
+    }
     dbs.sigiIn(data, callback);
 }
 
 const _up = function (data, callback) {
-    if(!(data.nickname && data.password)) return weaveErrorMsg(301);
+    if(!(data.nickname && data.password)) return {
+        status: weaveErrorMsg(301),
+        data: null
+    }
     dbs.sigiUp(data, callback);
     // var state = false;
     // users.forEach(function (item, index) {

@@ -1,53 +1,32 @@
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-// 跨域服务
-const cors = require('cors');
-const app = express();
-const sign = require('./sign/index.js');
-const editor = require('./edit/edit.js');
-// express 获取post参数用
-// app.use(bodyParser.urlencoded({ extended: false }));
+var express = require('express');
+var routers = require('./router.js')
+var app = new express();
+
+// post请求获取数据
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-function serverStart() {
+// 跨域处理 cors
+var cors = require('cors');
 
-// 测试用解决跨域问题
+app.use(cors({
+    origin:'*',
+    methods:['GET','POST'],
+    alloweHeaders:['Content-Type','Authorization']
+}))
+// 使用导出的接口
 
-    app.use(cors({
-        origin: '*',
-        methods:['GET','POST'],
-        alloweHeaders:['Content-Type','Authorization']
-    }))
+app.use('/v1', routers);
 
-// 登录
-    app.post('/sign/sign_in', function (req, res) {
-        sign.in(req.body, function (data) {
-            res.send(data)
-        })
+function startServer(port) {
 
-    })
+    var _PORT = port || 12300; 
 
-// 注册
-    app.post('/sign/sign_up', function (req, res) {
-        res.send(sign.up(req.body))
-    })
-
-// 发文
-    app.post('/article/edit', function (req, res) {
-        res.send(editor(req.body));
-    })
-
-// 标签
-    app.get('/tags/list', function (req, res) {
-        res.send()
-    })
-    app.post('/article/edit', function (req, res) {
-        res.send(editor(req.body));
-    })
-
-
-    app.listen(12300)
+    app.listen(_PORT);
+    
+    console.log('server started at: ' + _PORT);
 }
 
-module.exports = serverStart
+module.exports = startServer;
+
+

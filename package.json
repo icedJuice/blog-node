@@ -4,9 +4,8 @@
   "description": "server based on nodeJs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "testmongo": "node testmongo.js",
-    "dev": "node index.js"
+    "dev": "node ./src/index.js",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",

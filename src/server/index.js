@@ -9,12 +9,13 @@ const editor = require('./edit/edit.js');
 // express 获取post参数用
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const Server = function () {
+
+function serverStart() {
 
 // 测试用解决跨域问题
 
     app.use(cors({
-        origin:['http://localhost', 'http://localhost:80' ,'http://localhost:8080','http://localhost:3000','http://localhost:4000','http://127.0.0.1:27017'],
+        origin: '*',
         methods:['GET','POST'],
         alloweHeaders:['Content-Type','Authorization']
     }))
@@ -49,4 +50,4 @@ const Server = function () {
     app.listen(12300)
 }
 
-module.exports = Server
+module.exports = serverStart
